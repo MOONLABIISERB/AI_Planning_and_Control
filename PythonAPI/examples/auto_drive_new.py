@@ -63,7 +63,7 @@ try:
     sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/carla')
 except IndexError:
     pass
-sys.path.append('/media/storage/karthik/lbc')
+sys.path.append('../../../lbc')
 import carla
 from carla import ColorConverter as cc
 
@@ -1317,7 +1317,7 @@ def main():
     argparser.add_argument(
         '--model-path',
         help='Path of the model',
-        default='/media/storage/karthik/lbc/checkpoints/phase1/model-896.th')
+        default='../../checkpoints/phase1/model-896.th')
     argparser.add_argument(
         '--town',
         help='Set the town for rendering',
