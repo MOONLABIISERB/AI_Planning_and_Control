@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import cv2
+import time
 
 r = 500
 x3 = []
@@ -66,9 +67,11 @@ def createLane(x, y,r_ = 1.01):
     return np.array(X), np.array(Y)
 
 def getWindow(mapp, x, y, size = 192):
+    print('x1', mapp.shape)
     mapp = mapp[
     x-size//2:x+size//2,
     y-size//2:y+size//2]
+    print('x2', mapp.shape)
     return mapp
 
 # mapp = np.zeros((1500, 3000))
@@ -124,20 +127,30 @@ print(img.shape)
 # plt.plot(x+750, y+1500)
 # plt.show()
 # print(x)
-for i in range(1):
+
+# plt.imshow(img.transpose())
+# plt.plot(x+750, y+1500)
+# plt.show()
+for i in range(len(x)):
     # print((getWindow(img.transpose(), int(x[i]+750), int(y[i]+1500))).shape)
     # plt.imshow(getWindow(img.transpose(), int(x[0]+750), int(y[0]+1500)))
     # print(int(x[0])+ 192//2+750)
     # plt.imshow(img.transpose()[int(x[i])- 192//2+750:int(x[i])+192//2+750, int(x[1])-192//2+1500:int(x[1]) + 192//2+1500])
     # plt.show()
     # break
-    print(int(x[i]+750), int(y[i])+1500)
-    print(img.transpose().shape)
-    img = getWindow(img.transpose(), int(x[i]+750), int(y[i])+1500)
-    img = cv2.circle(img, (97, 97), 5, (255, 0, 0))
-    cv2.imshow('image', img)
-    
+    print(int(x[i]), int(y[i]))
+    print('x', img.shape)
+    print(int(x[i]+750-192//2), int(y[i]+1500-192//2))
+    print(int(x[i]+750+192//2), int(y[i]+1500+192//2))
+    image = cv2.rectangle(img.transpose(), (int(x[i]+750-192//2), int(y[i]+1500-192//2)), (int(x[i]+750+192//2), int(y[i]+1500+192//2)), (255, 0, 0), 2)
+    # img2 = getWindow(img.transpose(), int(x[i]+750), int(y[i]+1500))
+    # print('x', img2.shape)
+    # img = cv2.circle(img, (97, 97), 5, (255, 0, 0))
+    cv2.imshow('image', image)
     cv2.waitKey(0)
+    break
+    # plt.show()
+    # time.sleep(0.01)
     if cv2.waitKey(25) & 0xFF == ord('q'):
         break
     # plt.imshow(getWindow(img.transpose(), int(x[i]), int(y[i])))
